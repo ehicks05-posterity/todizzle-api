@@ -1,12 +1,17 @@
-import { Context, Hono } from 'hono';
-import { checkout } from './checkout.ts';
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { payments } from './payments.ts';
+import { webhooks } from './webhooks.ts';
 
 const app = new Hono();
 
-app.get('/', (c: Context) => {
+app.use(cors());
+
+app.get('/', (c) => {
 	return c.text('Hello Hono!');
 });
 
-app.route('/checkout', checkout);
+app.route('/payments', payments);
+app.route('/webhooks', webhooks);
 
 Deno.serve(app.fetch);
