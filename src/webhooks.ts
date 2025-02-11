@@ -17,13 +17,16 @@ webhooks.post('/stripe', async (c) => {
 
 	switch (event.type) {
 		case 'customer.created':
-			console.log({ customerId: event.data.object.id });
+			console.log({ customer: event.data.object });
 			break;
 		case 'customer.subscription.created':
+			console.log({ subscription: event.data.object });
 			break;
 		case 'customer.subscription.deleted':
+			console.log({ subscription: event.data.object });
 			break;
 		case 'customer.subscription.updated':
+			console.log({ subscription: event.data.object });
 			break;
 		default:
 			console.log(`Unhandled event type ${event.type}.`);
