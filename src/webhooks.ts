@@ -13,7 +13,7 @@ export const handleSubscriptionChange = async (
 
 	const update = { activeProductId: status === 'active' ? productId : null };
 	console.log('update payload:');
-	console.log(update);
+	console.log({ customer, update });
 	// await db.transact(db.tx.customers[customer.toString()].update(update));
 };
 
