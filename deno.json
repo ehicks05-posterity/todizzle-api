@@ -1,10 +1,10 @@
 {
   "imports": {
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.4.2",
-    "@instantdb/admin": "npm:@instantdb/admin@^0.17.12",
-    "hono": "npm:hono@^4.6.20",
+    "@instantdb/admin": "npm:@instantdb/admin@^0.17.15",
+    "hono": "npm:hono@^4.7.1",
     "stripe": "npm:stripe@^17.6.0",
-    "zod": "npm:zod@^3.24.1"
+    "zod": "npm:zod@^3.24.2"
   },
   "tasks": {
     "dev": "deno run --allow-net --allow-env --env-file --watch src/main.ts",

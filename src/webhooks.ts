@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { stripe, STRIPE_WH_SECRET } from './stripe.ts';
 import Stripe from 'stripe';
 import { db } from './db.ts';
-import { id } from '@instantdb/admin';
+import { id, lookup } from '@instantdb/admin';
 
 export const ACTIVE_STATUSES: Stripe.Subscription['status'][] = [
 	'active',
@@ -10,41 +10,46 @@ export const ACTIVE_STATUSES: Stripe.Subscription['status'][] = [
 	'past_due',
 ];
 
-export const handleSubscriptionChange = async (
-	eventType: Stripe.Event['type'],
-	subscription: Stripe.Subscription,
-) => {
-	const { id: subscriptionId, customer, status, items, metadata } =
-		subscription;
-	const { userId } = metadata;
+const INACTIVE_PRODUCT_ID = 'free';
+
+const extractSubscriptionFields = (subscription: Stripe.Subscription) => {
+	const { customer, status, items, metadata } = subscription;
 	const { product } = items.data[0].price;
 	const productId = typeof product === 'string' ? product : product.id;
 	const customerId = typeof customer === 'string' ? customer : customer.id;
+	const isActive = ACTIVE_STATUSES.includes(status);
 
-	console.log({
-		eventType,
-		subscriptionId,
-		customerId,
-		status,
-		productId,
-		userId,
-	});
-
-	const update = {
-		customerId,
-		activeProductId: ACTIVE_STATUSES.includes(status)
-			? productId
-			: undefined,
+	return {
+		userId: metadata.userId,
+		stripeCustomerId: customerId,
+		productId: isActive ? productId : INACTIVE_PRODUCT_ID,
 	};
+};
 
-	const users = await db.query({
-		$users: { $: { where: { id: userId } }, customer: {} },
+export const handleSubscriptionChange = async (
+	subscription: Stripe.Subscription,
+) => {
+	const { userId, stripeCustomerId, productId } = extractSubscriptionFields(
+		subscription,
+	);
+
+	// look for existing customer entity by userId
+	const customers = await db.query({
+		customers: { $: { where: { 'owner.id': userId } } },
 	});
-	const user = users.$users[0];
+	const customerId = customers[0]?.id;
 
+	// upsert customer entity and link customer to $user entity
 	await db.transact(
-		db.tx.customers[user.customer?.id || id()].update(update).link({
-			owner: userId,
+		db.tx.customers[customerId || id()].update({
+			customerId: stripeCustomerId,
+		}).link({ owner: userId }),
+	);
+
+	// link product to $user
+	await db.transact(
+		db.tx.products[lookup('productId', productId)].link({
+			subscribers: userId,
 		}),
 	);
 };
@@ -62,18 +67,19 @@ webhooks.post('/stripe', async (c) => {
 		sig,
 		STRIPE_WH_SECRET!,
 	);
+	console.log(`incoming ${event.type}`);
 
 	switch (event.type) {
 		case 'customer.subscription.created': {
-			await handleSubscriptionChange(event.type, event.data.object);
+			await handleSubscriptionChange(event.data.object);
 			break;
 		}
 		case 'customer.subscription.deleted': {
-			await handleSubscriptionChange(event.type, event.data.object);
+			await handleSubscriptionChange(event.data.object);
 			break;
 		}
 		case 'customer.subscription.updated': {
-			await handleSubscriptionChange(event.type, event.data.object);
+			await handleSubscriptionChange(event.data.object);
 			break;
 		}
 		default:
