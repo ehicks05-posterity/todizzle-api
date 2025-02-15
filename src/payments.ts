@@ -7,6 +7,8 @@ import { db } from './db.ts';
 import { HTTPException } from 'hono/http-exception';
 import type { User } from '@instantdb/admin';
 
+const CHECKOUT_RETURN_URL = Deno.env.get('CHECKOUT_RETURN_URL');
+
 const payments = new Hono();
 
 payments.get('/products', async (c) => {
@@ -42,8 +44,8 @@ payments.post(
 		const session = await stripe.checkout.sessions.create({
 			line_items: [{ price: priceId, quantity: 1 }],
 			mode: 'subscription',
-			success_url: 'http://localhost:5173/pricing',
-			cancel_url: 'http://localhost:5173/pricing',
+			success_url: CHECKOUT_RETURN_URL,
+			cancel_url: CHECKOUT_RETURN_URL,
 			subscription_data: { metadata: { userId: user.id } },
 			customer: customerId,
 		});
