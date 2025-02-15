@@ -37,7 +37,7 @@ export const handleSubscriptionChange = async (
 	const customers = await db.query({
 		customers: { $: { where: { 'owner.id': userId } } },
 	});
-	const customerId = customers[0]?.id;
+	const customerId = customers.customers[0]?.id;
 
 	// upsert customer entity and link customer to $user entity
 	await db.transact(
