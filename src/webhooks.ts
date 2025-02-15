@@ -70,14 +70,8 @@ webhooks.post('/stripe', async (c) => {
 	console.log(`incoming ${event.type}`);
 
 	switch (event.type) {
-		case 'customer.subscription.created': {
-			await handleSubscriptionChange(event.data.object);
-			break;
-		}
-		case 'customer.subscription.deleted': {
-			await handleSubscriptionChange(event.data.object);
-			break;
-		}
+		case 'customer.subscription.created':
+		case 'customer.subscription.deleted':
 		case 'customer.subscription.updated': {
 			await handleSubscriptionChange(event.data.object);
 			break;
