@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import { payments } from './payments.ts';
+import { payments } from './payment/payments.ts';
 import { webhooks } from './webhooks.ts';
 
 const app = new Hono();
