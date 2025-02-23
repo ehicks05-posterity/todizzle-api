@@ -1,4 +1,4 @@
-import { stripe } from '../lib/stripe';
+import { stripe } from '../lib/stripe.ts';
 import { db } from '../lib/db.ts';
 import { lookup } from '@instantdb/admin';
 import { ACTIVE_STATUSES, INACTIVE_PRODUCT_ID } from './constants.ts';
