@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { validator } from 'hono/validator';
 import { zValidator } from '@hono/zod-validator';
 import { z } from 'zod';
-import { db } from '../db.ts';
+import { db } from '../lib/db.ts';
 import { HTTPException } from 'hono/http-exception';
 import type { User } from '@instantdb/admin';
 import { getOrCreateCustomer } from './getOrCreateCustomer.ts';
@@ -32,7 +32,6 @@ payments.post(
 		const checkoutSession = await createCheckoutSession({
 			priceId,
 			customerId,
-			userId: user.id,
 		});
 
 		return c.json({ checkoutSessionUrl: checkoutSession.url });

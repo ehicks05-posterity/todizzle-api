@@ -1,8 +1,8 @@
 {
   "imports": {
-    "@hono/zod-validator": "npm:@hono/zod-validator@^0.4.2",
-    "@instantdb/admin": "npm:@instantdb/admin@^0.17.15",
-    "hono": "npm:hono@^4.7.1",
+    "@hono/zod-validator": "npm:@hono/zod-validator@^0.4.3",
+    "@instantdb/admin": "npm:@instantdb/admin@^0.17.21",
+    "hono": "npm:hono@^4.7.2",
     "stripe": "npm:stripe@^17.6.0",
     "zod": "npm:zod@^3.24.2"
   },

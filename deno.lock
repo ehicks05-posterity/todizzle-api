@@ -1,29 +1,29 @@
 {
   "version": "4",
   "specifiers": {
-    "npm:@hono/zod-validator@~0.4.2": "0.4.2_hono@4.7.1_zod@3.24.2",
-    "npm:@instantdb/admin@~0.17.15": "0.17.15",
+    "npm:@hono/zod-validator@~0.4.3": "0.4.3_hono@4.7.2_zod@3.24.2",
+    "npm:@instantdb/admin@~0.17.21": "0.17.21",
     "npm:@types/node@*": "22.5.4",
-    "npm:hono@^4.7.1": "4.7.1",
+    "npm:hono@^4.7.2": "4.7.2",
     "npm:stripe@^17.6.0": "17.6.0",
     "npm:zod@^3.24.2": "3.24.2"
   },
   "npm": {
-    "@hono/zod-validator@0.4.2_hono@4.7.1_zod@3.24.2": {
-      "integrity": "sha512-1rrlBg+EpDPhzOV4hT9pxr5+xDVmKuz6YJl+la7VCwK6ass5ldyKm5fD+umJdV2zhHD6jROoCCv8NbTwyfhT0g==",
+    "@hono/zod-validator@0.4.3_hono@4.7.2_zod@3.24.2": {
+      "integrity": "sha512-xIgMYXDyJ4Hj6ekm9T9Y27s080Nl9NXHcJkOvkXPhubOLj8hZkOL8pDnnXfvCf5xEE8Q4oMFenQUZZREUY2gqQ==",
       "dependencies": [
         "hono",
         "zod"
       ]
     },
-    "@instantdb/admin@0.17.15": {
-      "integrity": "sha512-kIuR0rykx7MRHTnBOQzFWCkuJFfJ9FNH6YixqY+7NJexUmtVhwtWxggney15D7S2Lti1udfVEWxilYbTZZ4K/Q==",
+    "@instantdb/admin@0.17.21": {
+      "integrity": "sha512-YAjI3SHAN+rdr8XJ04vNdbYN7Pf2bX8VwQW30pI1lAw3+h0ZXCGQnwBPMkBk0tJEslZo96ZlHmwcEHJVdL33jg==",
       "dependencies": [
         "@instantdb/core"
       ]
     },
-    "@instantdb/core@0.17.15": {
-      "integrity": "sha512-672TBWsS4kQ261+GxPeYdzuzDju9eKCTExwIgAuQzlJdltj8VHLb0Pp85yBm9Jj+2aoEahzM8OvthI4mTMbDrA==",
+    "@instantdb/core@0.17.21": {
+      "integrity": "sha512-iYauRnK607AQIlWkeCI4vDCXnaI0k4HQOEvJOoWFZE4OBsCwtgY+58BXjQPZg4aJvISMhy9IYEibJwalxYyo1Q==",
       "dependencies": [
         "mutative",
         "uuid"
@@ -112,8 +112,8 @@
         "function-bind"
       ]
     },
-    "hono@4.7.1": {
-      "integrity": "sha512-V3eWoPkBxoNgFCkSc5Y5rpLF6YoQQx1pkYO4qrF6YfOw8RZbujUNlJLZCxh0z9gZct70+je2Ih7Zrdpv21hP9w=="
+    "hono@4.7.2": {
+      "integrity": "sha512-8V5XxoOF6SI12jkHkzX/6aLBMU5GEF5g387EjVSQipS0DlxWgWGSMeEayY3CRBjtTUQYwLHx9JYouWqKzy2Vng=="
     },
     "math-intrinsics@1.1.0": {
       "integrity": "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="
@@ -188,9 +188,9 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:@hono/zod-validator@~0.4.2",
-      "npm:@instantdb/admin@~0.17.15",
-      "npm:hono@^4.7.1",
+      "npm:@hono/zod-validator@~0.4.3",
+      "npm:@instantdb/admin@~0.17.21",
+      "npm:hono@^4.7.2",
       "npm:stripe@^17.6.0",
       "npm:zod@^3.24.2"
     ]

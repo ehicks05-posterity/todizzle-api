@@ -1,5 +1,5 @@
 import { init } from '@instantdb/admin';
-import schema from '../instant.schema.ts';
+import schema from '../../instant.schema.ts';
 
 const INSTANT_APP_ID = Deno.env.get('INSTANT_APP_ID');
 if (!INSTANT_APP_ID) {

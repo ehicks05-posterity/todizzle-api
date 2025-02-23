@@ -1,5 +1,5 @@
-import { stripe } from '../stripe.ts';
-import { db } from '../db.ts';
+import { stripe } from '../lib/stripe.ts';
+import { db } from '../lib/db.ts';
 import { id, type User } from '@instantdb/admin';
 
 export const getOrCreateCustomer = async (user: User) => {
